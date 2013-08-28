@@ -15,6 +15,7 @@ public class Activator extends AbstractUIPlugin {
 
 	public Activator() {
 		super();
+		int i = 0;
 		plugin = this;
 	}
 
