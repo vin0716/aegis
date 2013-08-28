@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.7"?>
+<plugin>
+<extension point="com.teamcenter.rac.util.tc_properties" />
+<extension point="org.eclipse.core.expressions.definitions">
+  <definition id="athena.adminMenu">
+		<or>
+			<test property="com.teamcenter.rac.kernel.TCComponentUser.role" value="DBA" />
+		</or>
+	</definition>
+</extension>
+
+<!--Viewer-->
+
+<extension point="com.teamcenter.rac.viewer.ViewerViewRegistry">
+	<viewer
+		autoCheckout="false"
+		factoryClassName="aegis.origin.AthenaViewerFactory"
+		id="AthenaViewer"
+		isSwing="true"
+		priority="100"
+		viewPanel="aegis.origin.AthenaViewerPanel">
+		<enableWhen checkEnabled="false" />
+	</viewer>
+	<viewer
+		autoCheckout="false"
+		factoryClassName="aegis.origin.HelloWorldViewerFactory"
+		id="HelloWorldViewer"
+		isSwing="false"
+		priority="100">
+		<enableWhen checkEnabled="false" />
+</viewer>
+</extension>
+
+<extension point="org.eclipse.ui.commands">
+	<command id="Woori.Item" name="%Woori.Item" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.Document" name="%Woori.Document" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.Folder" name="%Woori.Folder" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.Download" name="%Woori.Download" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.Delete" name="%Woori.Delete" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.SearchDownloadHistory" name="%Woori.SearchDownloadHistory" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Woori.ShowViewer" name="%Woori.ShowViewer" defaultHandler="aegis.origin.AthenaTaskHandler" />
+</extension>
+<extension point="org.eclipse.ui.menus">
+	<menuContribution locationURI="menu:Athena.New.Menu?after=additions">
+	  <command commandId="Woori.Item" icon="image/woori/item_16.png" />
+	  <command commandId="Woori.Document" icon="image/woori/document_16.png" />
+	  <command commandId="Woori.Folder" icon="image/woori/folder_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Search.Menu?after=additions">
+		<command commandId="Woori.SearchDownloadHistory" icon="image/woori/search_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Menu?before=Athena.Preference">
+		<command commandId="Woori.Download" icon="image/woori/download_16.png">
+	    <visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.Delete" icon="image/woori/delete_16.png">
+	    <visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+	</menuContribution>
+	<menuContribution locationURI="toolbar:navigator_Toolbar?after=additions">
+		<command commandId="Woori.Item" icon="image/woori/item_16.png" tooltip="Create Item">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.Document" icon="image/woori/document_16.png" tooltip="Create Document">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.Folder" icon="image/woori/folder_16.png" tooltip="Create Folder">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.Download" icon="image/woori/download_16.png" tooltip="Download Dataset">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.Delete" icon="image/woori/delete_16.png" tooltip="Delete Mold">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+		<command commandId="Woori.ShowViewer" icon="image/woori/view.png" tooltip="Viewer">
+			<visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>
+	</menuContribution>	
+</extension>
+</plugin>

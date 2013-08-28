@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.7"?>
+<plugin>
+<extension point="com.teamcenter.rac.util.tc_properties" />
+<extension point="org.eclipse.core.expressions.definitions">
+  <definition id="athena.adminMenu">
+		<or>
+			<test property="com.teamcenter.rac.kernel.TCComponentUser.role" value="DBA" />
+		</or>
+	</definition>
+</extension>
+
+<!--Viewer-->
+
+<extension point="com.teamcenter.rac.viewer.ViewerViewRegistry">
+	<viewer
+		autoCheckout="false"
+		factoryClassName="aegis.origin.AthenaViewerFactory"
+		id="AthenaViewer"
+		isSwing="true"
+		priority="100"
+		viewPanel="aegis.origin.AthenaViewerPanel">
+		<enableWhen checkEnabled="false" />
+	</viewer>
+</extension>
+
+<extension point="org.eclipse.ui.commands">
+	<command id="WIQ.Part" name="%WIQ.Part" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.Document" name="%WIQ.Document" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.Client" name="%WIQ.Client" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.ClientDrawing" name="%WIQ.ClientDrawing" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.ECR" name="%WIQ.ECR" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.ECN" name="%WIQ.ECN" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.SearchPart" name="%WIQ.SearchPart" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.SearchDocument" name="%WIQ.SearchDocument" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.SearchClientDrawing" name="%WIQ.SearchClientDrawing" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.SearchECR" name="%WIQ.SearchECR" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="WIQ.SearchECN" name="%WIQ.SearchECN" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Aegis.SearchValues" name="%Aegis.SearchValues" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Aegis.ProcessView" name="%Aegis.ProcessView" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="Aegis.Migration" name="%Aegis.Migration" defaultHandler="aegis.origin.AthenaDialogHandler" />
+</extension>
+
+<extension point="org.eclipse.ui.menus">
+	<menuContribution locationURI="menu:Athena.New.Menu?after=additions">
+	  <command commandId="WIQ.Part" icon="image/wiq/part_16.png" />
+	  <command commandId="WIQ.Document" icon="image/wiq/document_16.png" />
+	  <command commandId="WIQ.Client" icon="image/wiq/client_16.png" />
+	  <command commandId="WIQ.ClientDrawing" icon="image/wiq/client_drawing_16.png" />
+	  <command commandId="WIQ.ECR" icon="image/wiq/ecr_16.png" />
+	  <command commandId="WIQ.ECN" icon="image/wiq/ecn_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Search.Menu?after=additions">
+		<command commandId="WIQ.SearchPart" icon="image/wiq/search_16.png" />
+		<command commandId="WIQ.SearchDocument" icon="image/wiq/search_16.png" />
+		<command commandId="WIQ.SearchClientDrawing" icon="image/wiq/search_16.png" />
+		<command commandId="WIQ.SearchECR" icon="image/wiq/search_16.png" />
+		<command commandId="WIQ.SearchECN" icon="image/wiq/search_16.png" />
+		<separator name="WIQ.Menu.Separator1" visible="true" />
+		<command commandId="Aegis.SearchValues" icon="image/search_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Workflow.Menu?after=additions">
+		<command commandId="Aegis.ProcessView" icon="image/search_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Menu?before=Athena.Preference">
+		<command commandId="Aegis.Migration" icon="image/migration_16.png">
+	    <visibleWhen>
+				<reference definitionId="com.teamcenter.rac.ui.inMainPerspective" />
+			</visibleWhen>
+		</command>		
+	</menuContribution>
+</extension>
+</plugin>

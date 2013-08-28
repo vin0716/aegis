@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.7"?>
+<plugin>
+<extension point="com.teamcenter.rac.util.tc_properties" />
+<extension point="org.eclipse.core.expressions.definitions">
+  <definition id="athena.adminMenu">
+		<or>
+			<test property="com.teamcenter.rac.kernel.TCComponentUser.role" value="DBA" />
+		</or>
+	</definition>
+</extension>
+
+<!--Viewer-->
+
+<extension point="com.teamcenter.rac.viewer.ViewerViewRegistry">
+	<viewer
+		autoCheckout="false"
+		factoryClassName="aegis.origin.AthenaViewerFactory"
+		id="AthenaViewer"
+		isSwing="true"
+		priority="100"
+		viewPanel="aegis.origin.AthenaViewerPanel">
+		<enableWhen checkEnabled="false" />
+	</viewer>
+</extension>
+
+<extension point="org.eclipse.ui.commands">
+	<command id="ISMS.Part" name="%ISMS.Part" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="ISMS.Document" name="%ISMS.Document" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="ISMS.Folder" name="%ISMS.Folder" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="ISMS.SearchDownloadHistory" name="%ISMS.SearchDownloadHistory" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="ISMS.Download" name="%ISMS.Download" defaultHandler="aegis.origin.AthenaDialogHandler" />
+	<command id="ISMS.ChangeID" name="%ISMS.ChangeID" defaultHandler="aegis.origin.AthenaDialogHandler" />
+</extension>
+<extension point="org.eclipse.ui.menus">
+	<menuContribution locationURI="menu:Athena.New.Menu?after=additions">
+	  <command commandId="ISMS.Part" icon="image/isms/part_16.png" />
+	  <command commandId="ISMS.Document" icon="image/isms/document_16.png" />
+	  <command commandId="ISMS.Folder" icon="image/isms/folder_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Search.Menu?after=additions">
+	  <command commandId="ISMS.SearchDownloadHistory" icon="image/isms/search_16.png" />
+	</menuContribution>
+	<menuContribution locationURI="menu:Athena.Menu?before=Athena.Menu.Separator">
+		<separator name="ISMS.Menu.Separator" visible="true" />
+	  <command commandId="ISMS.Download" icon="image/isms/download_16.png" />
+	  <command commandId="ISMS.ChangeID" icon="image/isms/part_16.png" />
+	</menuContribution>
+</extension>
+</plugin>
